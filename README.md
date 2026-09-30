@@ -1,29 +1,28 @@
 # dispatchai.fr
 
-Site vitrine DispatchAI. Un seul fichier HTML autonome (`index.html`), sans dépendance de build.
+Site vitrine DispatchAI, servi par un Cloudflare Worker avec assets statiques. Aucune étape de build.
 
-## Contenu du dossier
-- `index.html` : le site complet (styles et scripts inclus, polices Google chargées à la volée)
-- `og-image.png` : image de partage réseaux sociaux (1200 x 630)
-- `robots.txt`, `sitemap.xml` : référencement
-- `_headers`, `_redirects` : en-têtes de sécurité et redirection www vers apex (format Cloudflare Pages)
-- `functions/api/demo.js` : réception du formulaire de démo (Cloudflare Pages Function, envoi via Resend)
+## Structure
+- `public/` : le site (index.html autonome, og-image.png, robots.txt, sitemap.xml, `_headers`, `_redirects`)
+- `src/index.js` : le Worker. Sert `public/` et traite le formulaire de démo sur `POST /api/demo` (envoi via Resend)
+- `wrangler.jsonc` : configuration du Worker (`npx wrangler deploy`)
 
-## Déploiement sur Cloudflare Pages
-1. Pousser ce dossier dans un dépôt GitHub (`dispatchai-site`).
-2. Cloudflare > Workers & Pages > Create > Pages > Connect to Git, sélectionner le dépôt.
-   Build command : aucune. Output directory : `/` (racine).
-3. Settings > Environment variables : `RESEND_API_KEY`, `DEMO_TO`, `DEMO_FROM` (voir `functions/api/demo.js`).
-   Tant que ces variables sont absentes, le formulaire bascule automatiquement sur un mailto pré-rempli.
-4. Custom domains : ajouter `dispatchai.fr` et `www.dispatchai.fr`.
+## Déploiement
+Le Worker `dispatchai-site` est connecté au dépôt GitHub : chaque push sur `main` redéploie (commande `npx wrangler deploy`).
+URL technique : `https://dispatchai-site.<sous-domaine>.workers.dev`.
 
-## DNS chez Gandi
-Deux options :
-- Recommandée : transférer la gestion DNS à Cloudflare (Cloudflare > Add site > dispatchai.fr, puis remplacer les serveurs de noms chez Gandi par ceux fournis). Les enregistrements sont ensuite créés automatiquement par Pages.
-- Sans changer de DNS : chez Gandi, créer `CNAME @ -> dispatchai-site.pages.dev` (si Gandi refuse un CNAME à l'apex, utiliser ALIAS) et `CNAME www -> dispatchai-site.pages.dev`.
+## Domaine
+Worker > Settings > Domains & Routes > Add > Custom domain > `dispatchai.fr`, puis `www.dispatchai.fr`.
+Le domaine doit être géré par Cloudflare (Cloudflare > Add a domain > dispatchai.fr, puis serveurs de noms Cloudflare chez Gandi).
 
-Pour l'envoi d'e-mails depuis `@dispatchai.fr` (Resend), ajouter les enregistrements SPF, DKIM et DMARC fournis par Resend.
+## Formulaire de démo
+Worker > Settings > Variables and Secrets :
+- `RESEND_API_KEY` (secret) : clé API Resend, domaine dispatchai.fr vérifié (SPF, DKIM, DMARC dans Cloudflare DNS)
+- `DEMO_TO` : `contact@dispatchai.fr`
+- `DEMO_FROM` : `DispatchAI <demo@dispatchai.fr>`
+Sans ces variables, le formulaire ouvre un mailto pré-rempli.
 
-## À compléter avant mise en ligne
-- Lien LinkedIn de la page DispatchAI dans le pied de page
-- Adresse `contact@dispatchai.fr` active
+## Test local
+```bash
+npx wrangler dev
+```

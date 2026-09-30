@@ -1,11 +1,22 @@
-// Cloudflare Pages Function : reçoit le formulaire de demande de démo.
-// Variables d'environnement à définir dans Cloudflare Pages :
+// Worker dispatchai.fr : sert le site statique (dossier public/) et reçoit le formulaire de démo sur /api/demo.
+// Secrets à définir dans Cloudflare > Worker > Settings > Variables and Secrets :
 //   RESEND_API_KEY  clé API Resend (https://resend.com), domaine dispatchai.fr vérifié
 //   DEMO_TO         adresse de réception, ex. contact@dispatchai.fr
 //   DEMO_FROM       expéditeur, ex. "DispatchAI <demo@dispatchai.fr>"
-// Sans RESEND_API_KEY, la fonction répond 501 et le site bascule sur un mailto pré-rempli.
+// Sans RESEND_API_KEY, /api/demo répond 501 et le site bascule sur un mailto pré-rempli.
 
-export async function onRequestPost({ request, env }) {
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+    if (url.pathname === '/api/demo') {
+      if (request.method !== 'POST') return json({ error: 'Méthode non autorisée' }, 405);
+      return handleDemo(request, env);
+    }
+    return env.ASSETS.fetch(request);
+  },
+};
+
+async function handleDemo(request, env) {
   let data;
   try { data = await request.json(); } catch { return json({ error: 'JSON invalide' }, 400); }
 
@@ -14,6 +25,7 @@ export async function onRequestPost({ request, env }) {
   if (!name || !company || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
     return json({ error: 'Champs obligatoires manquants' }, 422);
   }
+  if (clean(data.website)) return json({ ok: true }); // piège anti-robot
   if (!env.RESEND_API_KEY) return json({ error: 'Envoi non configuré' }, 501);
 
   const lines = [
