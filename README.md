@@ -15,10 +15,8 @@ URL technique : `https://dispatchai-site.<sous-domaine>.workers.dev`.
 Worker > Settings > Domains & Routes > Add > Custom domain > `dispatchai.fr`, puis `www.dispatchai.fr`.
 Le domaine doit être géré par Cloudflare (Cloudflare > Add a domain > dispatchai.fr, puis serveurs de noms Cloudflare chez Gandi).
 
-## Compteur de vues
-Compteur serveur (Durable Object SQLite), sans cookie ni script tiers, robots exclus.
-Tableau de bord privé : `https://dispatchai.fr/stats?key=<STATS_KEY>` (JSON sur `/api/stats?key=...`).
-Définir le secret `STATS_KEY` dans Worker > Settings > Variables and Secrets.
+## Mesure d'audience
+GoatCounter, sans cookie : tableau de bord sur https://dispatchai.goatcounter.com (balise en fin de `public/index.html`).
 
 ## Formulaire de démo
 Worker > Settings > Variables and Secrets :

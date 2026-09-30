@@ -7,14 +7,13 @@
     "directory": "./public",
     "binding": "ASSETS",
     "not_found_handling": "404-page",
-    "run_worker_first": ["/api/*", "/stats", "/", "/index.html"]
+    "run_worker_first": ["/api/*"]
   },
-  "durable_objects": {
-    "bindings": [{ "name": "COUNTER", "class_name": "ViewCounter" }]
-  },
-  "migrations": [{ "tag": "v1", "new_sqlite_classes": ["ViewCounter"] }],
+  "migrations": [
+    { "tag": "v1", "new_sqlite_classes": ["ViewCounter"] },
+    { "tag": "v2", "deleted_classes": ["ViewCounter"] }
+  ],
   "observability": { "enabled": true }
   // Secrets à définir dans Cloudflare > Worker > Settings > Variables and Secrets :
-  //   STATS_KEY : clé d'accès au tableau de bord /stats?key=...
   //   RESEND_API_KEY, DEMO_TO, DEMO_FROM : formulaire de démo (voir README.md)
 }
