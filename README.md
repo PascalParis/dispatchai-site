@@ -3,8 +3,8 @@
 Site vitrine DispatchAI, servi par un Cloudflare Worker avec assets statiques. Aucune étape de build.
 
 ## Structure
-- `public/` : le site (index.html autonome, og-image.png, robots.txt, sitemap.xml, `_headers`, `_redirects`)
-- `src/index.js` : le Worker. Sert `public/` et traite le formulaire de démo sur `POST /api/demo` (envoi via Resend)
+- `public/` : le site (index.html autonome, og-image.png, robots.txt, sitemap.xml, `_headers`)
+- `src/index.js` : le Worker. Redirige www vers l'apex, sert `public/` et traite le formulaire de démo sur `POST /api/demo` (envoi via Resend)
 - `wrangler.jsonc` : configuration du Worker (`npx wrangler deploy`)
 
 ## Déploiement

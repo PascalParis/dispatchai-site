@@ -8,6 +8,11 @@
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    // www vers apex, en conservant chemin et paramètres
+    if (url.hostname === 'www.dispatchai.fr') {
+      url.hostname = 'dispatchai.fr';
+      return Response.redirect(url.toString(), 301);
+    }
     if (url.pathname === '/api/demo') {
       if (request.method !== 'POST') return json({ error: 'Méthode non autorisée' }, 405);
       return handleDemo(request, env);
