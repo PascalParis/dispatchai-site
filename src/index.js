@@ -7,10 +7,6 @@
 //   DEMO_FROM       expéditeur, ex. "DispatchAI <demo@dispatchai.fr>"
 // Sans RESEND_API_KEY, /api/demo répond 501 et le site bascule sur un mailto pré-rempli.
 
-import { DurableObject } from 'cloudflare:workers';
-// Classe conservée vide le temps de la migration v2 (suppression de l'ancien compteur). À retirer ensuite.
-export class ViewCounter extends DurableObject {}
-
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
