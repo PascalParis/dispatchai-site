@@ -15,6 +15,13 @@ export default {
       url.hostname = 'dispatchai.fr';
       return Response.redirect(url.toString(), 301);
     }
+    if (url.pathname === '/api/health') {
+      return json({
+        resend_api_key: Boolean(env.RESEND_API_KEY),
+        demo_to: env.DEMO_TO ? env.DEMO_TO.replace(/(^.).*(@.*$)/, '$1***$2') : '(défaut) bonjour@dispatchai.fr',
+        demo_from: env.DEMO_FROM || '(défaut) onboarding@resend.dev',
+      });
+    }
     if (url.pathname === '/api/demo') {
       if (request.method !== 'POST') return json({ error: 'Méthode non autorisée' }, 405);
       return handleDemo(request, env);
@@ -33,7 +40,10 @@ async function handleDemo(request, env) {
     return json({ error: 'Champs obligatoires manquants' }, 422);
   }
   if (clean(data.website)) return json({ ok: true });
-  if (!env.RESEND_API_KEY) return json({ error: 'Envoi non configuré' }, 501);
+  if (!env.RESEND_API_KEY) {
+    console.error('RESEND_API_KEY manquant');
+    return json({ error: 'Envoi non configuré : RESEND_API_KEY manquant' }, 501);
+  }
 
   const lines = [
     ['Nom', name], ['Société', company], ['E-mail', email], ['Téléphone', clean(data.phone)],
@@ -53,7 +63,11 @@ async function handleDemo(request, env) {
       text,
     }),
   });
-  if (!r.ok) return json({ error: 'Envoi impossible' }, 502);
+  if (!r.ok) {
+    const detail = await r.text();
+    console.error('Resend error', r.status, detail);
+    return json({ error: 'Envoi impossible', status: r.status, detail: detail.slice(0, 300) }, 502);
+  }
   return json({ ok: true });
 }
 

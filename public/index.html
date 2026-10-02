@@ -426,6 +426,9 @@ textarea{min-height:110px; resize:vertical}
 .form-status{padding:14px 16px; border-radius:10px; font-size:.95rem; display:none}
 .form-status.ok{display:block; background:var(--green-soft); color:var(--green)}
 .form-status.err{display:block; background:var(--amber-soft); color:#8A5A00}
+:root[data-theme="dark"] .form-status.err{color:#FFD58A}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .form-status.err{color:#FFD58A} }
+.form-status a{color:inherit; text-decoration:underline}
 .hp{position:absolute; left:-9999px; opacity:0}
 
 /* FAQ */
@@ -1288,7 +1291,7 @@ Cordialement, P. Dubois</div></div>
     submit.disabled=true; submit.textContent='Envoi en cours';
     try{
       const r=await fetch('/api/demo',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
-      if(!r.ok) throw new Error('http '+r.status);
+      if(!r.ok){ let d=''; try{ d=JSON.stringify(await r.json()); }catch(_){} console.error('Formulaire DispatchAI', r.status, d); throw new Error('http '+r.status); }
       status.textContent='Merci, votre demande est envoyée. Nous vous recontactons sous un jour ouvré.'; status.className='form-status ok';
       form.reset(); submit.textContent='Demande envoyée';
     }catch(err){
