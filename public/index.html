@@ -461,7 +461,8 @@ footer{border-top:1px solid var(--line); padding:48px 0 calc(28px + env(safe-are
 .foot .brand p{margin-top:12px; max-width:32ch}
 .offices{display:grid; grid-template-columns:repeat(3,1fr); gap:32px; margin-top:36px; padding-top:28px; border-top:1px solid var(--line)}
 @media (max-width: 760px){ .offices{grid-template-columns:1fr; gap:18px} }
-.offices b{display:block; color:var(--ink); font-weight:600; margin-bottom:4px}
+.offices b{display:flex; align-items:center; gap:8px; color:var(--ink); font-weight:600; margin-bottom:4px}
+.offices .flag{width:21px; height:14px; border-radius:2px; box-shadow:0 0 0 1px rgba(127,127,127,.35); flex:none}
 .offices a{color:inherit}
 .foot-bottom{margin-top:36px; padding-top:20px; border-top:1px solid var(--line); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; font-size:.88rem}
 
@@ -1177,9 +1178,9 @@ Cordialement, P. Dubois</div></div>
       </div>
     </div>
     <div class="offices" aria-label="Nos bureaux">
-      <div><b>Paris</b>7 rue de Madrid, 75008 Paris<br><a href="tel:+33187667518">+33 1 87 66 75 18</a></div>
-      <div><b>Bruxelles</b>Square de Meeûs 35, 1000 Bruxelles<br><a href="tel:+32470748101">+32 470 74 81 01</a></div>
-      <div><b>Londres</b>33 Queen Street, London EC4R 1AP<br><a href="tel:+442080731944">+44 20 8073 1944</a></div>
+      <div><b><svg class="flag" viewBox="0 0 3 2" aria-hidden="true"><rect width="1" height="2" fill="#002395"/><rect x="1" width="1" height="2" fill="#fff"/><rect x="2" width="1" height="2" fill="#ED2939"/></svg>Paris</b>7 rue de Madrid, 75008 Paris<br><a href="tel:+33187667518">+33 1 87 66 75 18</a></div>
+      <div><b><svg class="flag" viewBox="0 0 3 2" aria-hidden="true"><rect width="1" height="2" fill="#000"/><rect x="1" width="1" height="2" fill="#FAE042"/><rect x="2" width="1" height="2" fill="#ED2939"/></svg>Bruxelles</b>Square de Meeûs 35, 1000 Bruxelles<br><a href="tel:+32470748101">+32 470 74 81 01</a></div>
+      <div><b><svg class="flag" viewBox="0 0 60 30" aria-hidden="true"><clipPath id="gbc"><path d="M30,15 h30 v15 z v15 h-30 z h-30 v-15 z v-15 h30 z"/></clipPath><path d="M0,0 v30 h60 v-30 z" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" clip-path="url(#gbc)" stroke="#C8102E" stroke-width="4"/><path d="M30,0 v30 M0,15 h60" stroke="#fff" stroke-width="10"/><path d="M30,0 v30 M0,15 h60" stroke="#C8102E" stroke-width="6"/></svg>Londres</b>33 Queen Street, London EC4R 1AP<br><a href="tel:+442080731944">+44 20 8073 1944</a></div>
     </div>
     <div class="foot-bottom">
       <span>© <span id="year"></span> DispatchAI, un produit de Fourquarks SPRL, Bruxelles. Tous droits réservés.</span>
