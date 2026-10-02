@@ -45,10 +45,16 @@
       "@id": "https://dispatchai.fr/#org",
       "name": "DispatchAI",
       "url": "https://dispatchai.fr/",
-      "email": "contact@dispatchai.fr",
+      "email": "bonjour@dispatchai.fr",
       "logo": "https://dispatchai.fr/logo.png",
       "parentOrganization": { "@type": "Organization", "name": "Fourquarks SPRL", "vatID": "BE0719961516" },
-      "address": { "@type": "PostalAddress", "streetAddress": "Square de Meeûs 35", "postalCode": "1000", "addressLocality": "Bruxelles", "addressCountry": "BE" }
+      "telephone": "+33 1 87 66 75 18",
+      "address": { "@type": "PostalAddress", "streetAddress": "Square de Meeûs 35", "postalCode": "1000", "addressLocality": "Bruxelles", "addressCountry": "BE" },
+      "location": [
+        { "@type": "Place", "name": "DispatchAI Paris", "telephone": "+33 1 87 66 75 18", "address": { "@type": "PostalAddress", "streetAddress": "7 rue de Madrid", "postalCode": "75008", "addressLocality": "Paris", "addressCountry": "FR" } },
+        { "@type": "Place", "name": "DispatchAI Bruxelles", "telephone": "+32 470 74 81 01", "address": { "@type": "PostalAddress", "streetAddress": "Square de Meeûs 35", "postalCode": "1000", "addressLocality": "Bruxelles", "addressCountry": "BE" } },
+        { "@type": "Place", "name": "DispatchAI London", "telephone": "+44 20 8073 1944", "address": { "@type": "PostalAddress", "streetAddress": "33 Queen Street", "postalCode": "EC4R 1AP", "addressLocality": "London", "addressCountry": "GB" } }
+      ]
     },
     {
       "@type": "SoftwareApplication",
@@ -453,6 +459,10 @@ footer{border-top:1px solid var(--line); padding:48px 0 calc(28px + env(safe-are
 .foot h4{color:var(--ink); font-size:.95rem; margin-bottom:14px}
 .foot ul{list-style:none; margin:0; padding:0; display:grid; gap:9px}
 .foot .brand p{margin-top:12px; max-width:32ch}
+.offices{display:grid; grid-template-columns:repeat(3,1fr); gap:32px; margin-top:36px; padding-top:28px; border-top:1px solid var(--line)}
+@media (max-width: 760px){ .offices{grid-template-columns:1fr; gap:18px} }
+.offices b{display:block; color:var(--ink); font-weight:600; margin-bottom:4px}
+.offices a{color:inherit}
 .foot-bottom{margin-top:36px; padding-top:20px; border-top:1px solid var(--line); display:flex; justify-content:space-between; gap:16px; flex-wrap:wrap; font-size:.88rem}
 
 /* Modales légales */
@@ -1056,7 +1066,7 @@ Cordialement, P. Dubois</div></div>
         <label class="consent"><input type="checkbox" name="consent" required><span>J'accepte que DispatchAI utilise ces informations pour me recontacter au sujet de ma demande. <a href="#" data-dialog="privacy">Politique de confidentialité</a>.</span></label>
         <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
         <button class="btn btn-primary" type="submit" id="submitBtn" style="justify-self:start">Demander une démo</button>
-        <p class="form-note">Réponse sous un jour ouvré. Vous pouvez aussi nous écrire à <a href="mailto:contact@dispatchai.fr">contact@dispatchai.fr</a>.</p>
+        <p class="form-note">Réponse sous un jour ouvré. Vous pouvez aussi nous écrire à <a href="mailto:bonjour@dispatchai.fr">bonjour@dispatchai.fr</a>.</p>
       </form>
     </div>
   </div>
@@ -1120,7 +1130,7 @@ Cordialement, P. Dubois</div></div>
       </div>
       <div class="acts">
         <a class="btn btn-light" href="#demo">Demander une démo</a>
-        <a class="btn btn-ghost" href="mailto:contact@dispatchai.fr">Nous écrire</a>
+        <a class="btn btn-ghost" href="mailto:bonjour@dispatchai.fr">Nous écrire</a>
       </div>
     </div>
   </div>
@@ -1159,11 +1169,17 @@ Cordialement, P. Dubois</div></div>
       <div>
         <h4>Contact</h4>
         <ul>
-          <li><a href="mailto:contact@dispatchai.fr">contact@dispatchai.fr</a></li>
+          <li><a href="mailto:bonjour@dispatchai.fr">bonjour@dispatchai.fr</a></li>
+          <li><a href="tel:+33187667518">+33 1 87 66 75 18</a></li>
           <li><a href="https://www.yuman.io/" rel="noopener">Yuman, GMAO partenaire</a></li>
           <li><a href="https://www.linkedin.com/company/dispatchai" rel="noopener">LinkedIn</a></li>
         </ul>
       </div>
+    </div>
+    <div class="offices" aria-label="Nos bureaux">
+      <div><b>Paris</b>7 rue de Madrid, 75008 Paris<br><a href="tel:+33187667518">+33 1 87 66 75 18</a></div>
+      <div><b>Bruxelles</b>Square de Meeûs 35, 1000 Bruxelles<br><a href="tel:+32470748101">+32 470 74 81 01</a></div>
+      <div><b>Londres</b>33 Queen Street, London EC4R 1AP<br><a href="tel:+442080731944">+44 20 8073 1944</a></div>
     </div>
     <div class="foot-bottom">
       <span>© <span id="year"></span> DispatchAI, un produit de Fourquarks SPRL, Bruxelles. Tous droits réservés.</span>
@@ -1179,7 +1195,9 @@ Cordialement, P. Dubois</div></div>
   <div class="d-head"><h3 id="dlg-legal-title">Mentions légales</h3><button class="icon-btn" data-close aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
   <div class="d-body">
     <h4>Éditeur</h4>
-    <p>DispatchAI conçoit, développe et maintient des solutions logicielles distribuées en mode SaaS (Software as a Service). Le site dispatchai.fr et le service DispatchAI sont édités par Fourquarks SPRL, Square de Meeûs 35, 1000 Bruxelles, Belgique. TVA : BE 0719 961 516. Contact : contact@dispatchai.fr.</p>
+    <p>DispatchAI conçoit, développe et maintient des solutions logicielles distribuées en mode SaaS (Software as a Service). Le site dispatchai.fr et le service DispatchAI sont édités par Fourquarks SPRL, Square de Meeûs 35, 1000 Bruxelles, Belgique. TVA : BE 0719 961 516. Contact : bonjour@dispatchai.fr.</p>
+    <h4>Bureaux</h4>
+    <p>Siège : Square de Meeûs 35, 1000 Bruxelles, Belgique, +32 470 74 81 01. Paris : 7 rue de Madrid, 75008 Paris, France, +33 1 87 66 75 18. Londres : 33 Queen Street, London EC4R 1AP, Royaume-Uni, +44 20 8073 1944.</p>
     <h4>Gérance et direction de la publication</h4>
     <p>M. Pascal Fievet, gérant de Fourquarks SPRL.</p>
     <h4>Hébergement</h4>
@@ -1195,7 +1213,7 @@ Cordialement, P. Dubois</div></div>
   <div class="d-head"><h3 id="dlg-privacy-title">Politique de confidentialité</h3><button class="icon-btn" data-close aria-label="Fermer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
   <div class="d-body">
     <h4>Responsable du traitement</h4>
-    <p>Fourquarks SPRL, Square de Meeûs 35, 1000 Bruxelles, Belgique. TVA BE 0719 961 516. Contact : contact@dispatchai.fr.</p>
+    <p>Fourquarks SPRL, Square de Meeûs 35, 1000 Bruxelles, Belgique. TVA BE 0719 961 516. Contact : bonjour@dispatchai.fr.</p>
     <h4>Données collectées sur ce site</h4>
     <p>Le formulaire de demande de démonstration collecte les informations que vous saisissez (identité, société, coordonnées professionnelles, outil utilisé, volume indicatif, message). Ces données servent uniquement à répondre à votre demande et à organiser une démonstration. Base légale : votre consentement et notre intérêt légitime à répondre à une sollicitation commerciale.</p>
     <h4>Cookies et mesure d'audience</h4>
@@ -1203,7 +1221,7 @@ Cordialement, P. Dubois</div></div>
     <h4>Conservation</h4>
     <p>Les demandes de démonstration sont conservées au maximum 24 mois après le dernier échange, puis supprimées.</p>
     <h4>Vos droits</h4>
-    <p>Vous disposez d'un droit d'accès, de rectification, d'effacement, d'opposition et de portabilité. Écrivez à contact@dispatchai.fr. Vous pouvez également saisir l'Autorité de protection des données (Belgique) ou la CNIL (France).</p>
+    <p>Vous disposez d'un droit d'accès, de rectification, d'effacement, d'opposition et de portabilité. Écrivez à bonjour@dispatchai.fr. Vous pouvez également saisir l'Autorité de protection des données (Belgique) ou la CNIL (France).</p>
     <h4>Service DispatchAI</h4>
     <p>Le traitement des données réalisé par le service DispatchAI pour le compte de ses clients prestataires est encadré par un contrat de traitement des données (DPA) distinct, remis à chaque client. Les données sont hébergées en Union européenne et ne sont pas utilisées pour entraîner des modèles tiers.</p>
   </div>
@@ -1275,8 +1293,8 @@ Cordialement, P. Dubois</div></div>
       form.reset(); submit.textContent='Demande envoyée';
     }catch(err){
       const body=encodeURIComponent(Object.entries(data).map(([k,v])=>k+' : '+v).join('\n'));
-      location.href='mailto:contact@dispatchai.fr?subject='+encodeURIComponent('Demande de démo DispatchAI')+'&body='+body;
-      status.textContent='Votre messagerie s\'ouvre avec la demande pré-remplie. Si rien ne se passe, écrivez-nous à contact@dispatchai.fr.'; status.className='form-status err';
+      location.href='mailto:bonjour@dispatchai.fr?subject='+encodeURIComponent('Demande de démo DispatchAI')+'&body='+body;
+      status.textContent='Votre messagerie s\'ouvre avec la demande pré-remplie. Si rien ne se passe, écrivez-nous à bonjour@dispatchai.fr.'; status.className='form-status err';
       submit.disabled=false; submit.textContent='Demander une démo';
     }
   });

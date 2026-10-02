@@ -21,7 +21,7 @@ GoatCounter, sans cookie : tableau de bord sur https://dispatchai.goatcounter.co
 ## Formulaire de démo
 Worker > Settings > Variables and Secrets :
 - `RESEND_API_KEY` (secret) : clé API Resend, domaine dispatchai.fr vérifié (SPF, DKIM, DMARC dans Cloudflare DNS)
-- `DEMO_TO` : `contact@dispatchai.fr`
+- `DEMO_TO` : `bonjour@dispatchai.fr`
 - `DEMO_FROM` : `DispatchAI <demo@dispatchai.fr>`
 Sans ces variables, le formulaire ouvre un mailto pré-rempli.
 
