@@ -1278,24 +1278,22 @@ Cordialement, P. Dubois</div></div>
     });
   });
 
-  /* Formulaire de démo : POST vers /api/demo (Cloudflare Worker à brancher), repli mailto */
+  /* Formulaire de démo : envoi direct via /api/demo (Worker + Resend), sans ouvrir la messagerie */
   const form=$('#demoForm'), status=$('#formStatus'), submit=$('#submitBtn');
   form.addEventListener('submit', async e=>{
     e.preventDefault();
     status.className='form-status';
-    if(form.website.value) return; // piège anti-robot
+    if(form.website.value) return;
     if(!form.checkValidity()){ form.reportValidity(); return; }
     const data=Object.fromEntries(new FormData(form).entries()); delete data.website;
     submit.disabled=true; submit.textContent='Envoi en cours';
     try{
       const r=await fetch('/api/demo',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
       if(!r.ok) throw new Error('http '+r.status);
-      status.textContent='Demande envoyée. Nous vous recontactons sous un jour ouvré.'; status.className='form-status ok';
+      status.textContent='Merci, votre demande est envoyée. Nous vous recontactons sous un jour ouvré.'; status.className='form-status ok';
       form.reset(); submit.textContent='Demande envoyée';
     }catch(err){
-      const body=encodeURIComponent(Object.entries(data).map(([k,v])=>k+' : '+v).join('\n'));
-      location.href='mailto:bonjour@dispatchai.fr?subject='+encodeURIComponent('Demande de démo DispatchAI')+'&body='+body;
-      status.textContent='Votre messagerie s\'ouvre avec la demande pré-remplie. Si rien ne se passe, écrivez-nous à bonjour@dispatchai.fr.'; status.className='form-status err';
+      status.innerHTML='L\'envoi n\'a pas abouti. Réessayez dans un instant ou écrivez-nous à <a href="mailto:bonjour@dispatchai.fr">bonjour@dispatchai.fr</a>.'; status.className='form-status err';
       submit.disabled=false; submit.textContent='Demander une démo';
     }
   });

@@ -5,7 +5,8 @@
 //   RESEND_API_KEY  clé API Resend (https://resend.com), domaine dispatchai.fr vérifié
 //   DEMO_TO         adresse de réception, ex. bonjour@dispatchai.fr
 //   DEMO_FROM       expéditeur, ex. "DispatchAI <demo@dispatchai.fr>"
-// Sans RESEND_API_KEY, /api/demo répond 501 et le site bascule sur un mailto pré-rempli.
+// Sans domaine vérifié chez Resend, laisser DEMO_FROM vide : l'expéditeur onboarding@resend.dev
+// fonctionne, à condition que DEMO_TO soit l'adresse du compte Resend.
 
 export default {
   async fetch(request, env) {
@@ -45,7 +46,7 @@ async function handleDemo(request, env) {
     method: 'POST',
     headers: { 'Authorization': `Bearer ${env.RESEND_API_KEY}`, 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      from: env.DEMO_FROM || 'DispatchAI <demo@dispatchai.fr>',
+      from: env.DEMO_FROM || 'DispatchAI <onboarding@resend.dev>',
       to: [env.DEMO_TO || 'bonjour@dispatchai.fr'],
       reply_to: email,
       subject: `Demande de démo : ${company} (${name})`,
