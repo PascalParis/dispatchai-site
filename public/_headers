@@ -4,7 +4,7 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
-  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://gc.zgo.at; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://dispatchai.goatcounter.com; connect-src 'self' https://dispatchai.goatcounter.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' mailto:
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://gc.zgo.at; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://dispatchai.goatcounter.com; connect-src 'self' https://dispatchai.fr https://www.dispatchai.fr https://dispatchai-site.pour-sauver-le-nom.workers.dev https://dispatchai.goatcounter.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' https://dispatchai.fr mailto:
 /index.html
   Cache-Control: public, max-age=0, must-revalidate
 /og-image.png
