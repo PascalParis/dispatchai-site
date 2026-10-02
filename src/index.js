@@ -11,10 +11,6 @@
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    if (url.hostname === 'www.dispatchai.fr') {
-      url.hostname = 'dispatchai.fr';
-      return Response.redirect(url.toString(), 301);
-    }
     if (url.pathname === '/api/health') {
       return json({
         resend_api_key: Boolean(env.RESEND_API_KEY),
@@ -25,6 +21,11 @@ export default {
     if (url.pathname === '/api/demo') {
       if (request.method !== 'POST') return json({ error: 'Méthode non autorisée' }, 405);
       return handleDemo(request, env);
+    }
+    // www vers apex pour les pages (les appels /api ci-dessus fonctionnent sur les deux adresses)
+    if (url.hostname === 'www.dispatchai.fr') {
+      url.hostname = 'dispatchai.fr';
+      return Response.redirect(url.toString(), 301);
     }
     return env.ASSETS.fetch(request);
   },
