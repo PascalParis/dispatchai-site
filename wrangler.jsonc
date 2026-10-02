@@ -9,7 +9,9 @@
     "not_found_handling": "404-page",
     "run_worker_first": ["/api/*"]
   },
-  "observability": { "enabled": true }
+  "observability": { "enabled": true },
+  // Conserve les variables définies dans le dashboard Cloudflare lors des déploiements Git
+  "keep_vars": true
   // Secrets à définir dans Cloudflare > Worker > Settings > Variables and Secrets :
   //   RESEND_API_KEY, DEMO_TO, DEMO_FROM : formulaire de démo (voir README.md)
 }
